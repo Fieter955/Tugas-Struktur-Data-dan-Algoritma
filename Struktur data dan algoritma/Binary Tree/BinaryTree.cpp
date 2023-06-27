@@ -22,10 +22,20 @@ Node *BinaryTree::insertRecursive(Node *currentRoot,int insertId){
 		currentRoot->right = insertRecursive(currentRoot->right, insertId);
 		
 	}
-	return currentRoot;
+
 	
 }
 
+Node* BinaryTree::search(int val){
+    Node* result = searchNode(root, val);
+    if(result == NULL){
+        cout << "Node with value " << val << " not found in the tree." << endl;
+    }
+    else {
+		cout<<"Node with value " << val << " found in the tree."; 
+	}
+    return result;
+}
 
 
 Node* BinaryTree::searchNode(Node* node, int val){
@@ -40,7 +50,7 @@ Node* BinaryTree::searchNode(Node* node, int val){
 
 Node* BinaryTree::findMin() {
     Node* node = root;
-    while (node != NULL && node->left != NULL) {
+    while (node->left != NULL) {
         node = node->left;
     }
 
@@ -52,7 +62,7 @@ Node* BinaryTree::findMin() {
 
 Node* BinaryTree::findMax() {
     Node* node = root;
-    while (node != NULL && node->right != NULL) {
+    while (node->right != NULL) {
         node = node->right;
     }
 
@@ -61,19 +71,6 @@ Node* BinaryTree::findMax() {
 
     return node;
 }
-
-
-
-Node* BinaryTree::search(int val){
-    Node* result = searchNode(root, val);
-    if(result == NULL){
-        cout << "Node with value " << val << " not found in the tree." << endl;
-    }
-    else {
-		cout<<"Node with value " << val << " found in the tree."; 
-	}
-    return result;
-}
  	
 
 
@@ -81,13 +78,6 @@ void BinaryTree::inOrder(){
 	inOrderRecursive(root);
 }
 
-void BinaryTree::preOrder(){
-	PreOrderRecursive(root);
-}
-
-void BinaryTree::postOrder(){
-	PostOrderRecursive(root);
-}
 void BinaryTree::inOrderRecursive(Node *currentRoot){
 	if(currentRoot != NULL){
 		inOrderRecursive(currentRoot->left);
@@ -95,6 +85,10 @@ void BinaryTree::inOrderRecursive(Node *currentRoot){
 		inOrderRecursive(currentRoot->right);
 	}
 	
+}
+
+void BinaryTree::preOrder(){
+	PreOrderRecursive(root);
 }
 
 void BinaryTree::PreOrderRecursive(Node *currentRoot){
@@ -106,6 +100,11 @@ void BinaryTree::PreOrderRecursive(Node *currentRoot){
 	
 }
 
+void BinaryTree::postOrder(){
+	PostOrderRecursive(root);
+}
+
+
 void BinaryTree::PostOrderRecursive(Node *currentRoot){
 	if(currentRoot != NULL){
 		inOrderRecursive(currentRoot->left);
@@ -114,7 +113,6 @@ void BinaryTree::PostOrderRecursive(Node *currentRoot){
 	}
 	
 }
-
 
 void BinaryTree::deleteNode(int nilai){
     root = deleteRecursive(root, nilai);
